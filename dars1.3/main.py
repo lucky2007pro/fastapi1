@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-from routers.books import router as books_router
-from routers.authors import router as authors_router
+from books.routers import router as books_router
+from authors.routers import router as authors_router
 
-app = FastAPI(title="Book Library API")
+app = FastAPI()
 
-app.include_router(books_router)
-app.include_router(authors_router)
+app.include_router(books_router, prefix="/books")
+app.include_router(authors_router, prefix="/authors")
 
 @app.get("/")
-def root():
-    return {"message": "Welcome to the Book Library API"}
+def home():
+    return {"message": "Dars 1.3 Home"}

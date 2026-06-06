@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-from routers.users import router as users_router
-from routers.products import router as products_router
+from users.routers import router as users_router
+from products.routers import router as products_router
 
-app = FastAPI(title="E-Commerce API")
+app = FastAPI()
 
-app.include_router(users_router)
-app.include_router(products_router)
+app.include_router(users_router, prefix="/users")
+app.include_router(products_router, prefix="/products")
 
 @app.get("/")
-def root():
-    return {"message": "Welcome to the E-Commerce API"}
+def home():
+    return {"message": "Dars 1 Home"}

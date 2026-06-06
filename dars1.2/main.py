@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-from routers.tasks import router as tasks_router
-from routers.categories import router as categories_router
+from tasks.routers import router as tasks_router
+from categories.routers import router as categories_router
 
-app = FastAPI(title="Task Manager API")
+app = FastAPI()
 
-app.include_router(tasks_router)
-app.include_router(categories_router)
+app.include_router(tasks_router, prefix="/tasks")
+app.include_router(categories_router, prefix="/categories")
 
 @app.get("/")
-def root():
-    return {"message": "Welcome to the Task Manager API"}
+def home():
+    return {"message": "Dars 1.2 Home"}

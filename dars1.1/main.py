@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-from routers.posts import router as posts_router
-from routers.comments import router as comments_router
+from posts.routers import router as posts_router
+from comments.routers import router as comments_router
 
-app = FastAPI(title="Blog API")
+app = FastAPI()
 
-app.include_router(posts_router)
-app.include_router(comments_router)
+app.include_router(posts_router, prefix="/posts")
+app.include_router(comments_router, prefix="/comments")
 
 @app.get("/")
-def root():
-    return {"message": "Welcome to the Blog API"}
+def home():
+    return {"message": "Dars 1.1 Home"}
