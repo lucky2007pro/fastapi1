@@ -1,11 +1,13 @@
 from fastapi import FastAPI
+import users.models
+from database import engine
 from users.routers import router as users_router
-from products.routers import router as products_router
-from fastapi import FastAPI
+
 app = FastAPI()
 
-app.include_router(users_router, prefix="/users")
-app.include_router(products_router, prefix="/products")
+users.models.Base.metadata.create_all(bind=engine)
+
+app.include_router(users_router, prefix="/users", tags=["Users"])
 
 @app.get("/")
 def home():
